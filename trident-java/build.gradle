@@ -12,14 +12,16 @@ allprojects {
     group = 'org.tron.trident'
 
     repositories {
-        maven { url "http://192.168.0.129:8889/repository/maven-public"}
+        maven {
+            url "http://192.168.0.129:8889/repository/maven-public"
+            allowInsecureProtocol = true
+        }
         mavenCentral()
     }
 }
 
 subprojects {
     apply plugin: 'java'
-    apply plugin: 'maven'
     apply plugin: 'maven-publish'
 
     java {
@@ -69,6 +71,7 @@ subprojects {
         }
         repositories {
             maven {
+                allowInsecureProtocol = true
                 if (project.version.endsWith('-SNAPSHOT')) {
                     url = "http://192.168.0.129:8889/repository/maven-snapshots/"
                 } else {
