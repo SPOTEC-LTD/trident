@@ -12,6 +12,7 @@ allprojects {
     group = 'org.tron.trident'
 
     repositories {
+        maven { url "http://192.168.0.129:8889/repository/maven-public"}
         mavenCentral()
     }
 }
@@ -54,6 +55,32 @@ subprojects {
     artifacts {
         archives jar
         archives sourcesJar
+    }
+
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                groupId project.group
+                artifactId project.name
+                version project.version
+                //若是war包，就写components.web,若是jar包，就写components.java
+                from components.java
+            }
+        }
+        repositories {
+            maven {
+                if (project.version.endsWith('-SNAPSHOT')) {
+                    url = "http://192.168.0.129:8889/repository/maven-snapshots/"
+                } else {
+                    url = "http://192.168.0.129:8889/repository/maven-releases/"
+                }
+
+                credentials {
+                    username 'admin'
+                    password 'spo123456'
+                }
+            }
+        }
     }
 }
 
