@@ -13,7 +13,7 @@ allprojects {
 
     repositories {
         maven {
-            url "http://192.168.0.129:8889/repository/maven-public"
+            url "http://spotec.net:8889/repository/maven-public"
             allowInsecureProtocol = true
         }
         mavenCentral()
@@ -73,9 +73,9 @@ subprojects {
             maven {
                 allowInsecureProtocol = true
                 if (project.version.endsWith('-SNAPSHOT')) {
-                    url = "http://192.168.0.129:8889/repository/maven-snapshots/"
+                    url = "http://spotec.net:8889/repository/maven-snapshots/"
                 } else {
-                    url = "http://192.168.0.129:8889/repository/maven-releases/"
+                    url = "http://spotec.net:8889/repository/maven-releases/"
                 }
 
                 credentials {
